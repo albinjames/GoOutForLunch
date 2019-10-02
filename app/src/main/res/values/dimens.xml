@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_xsmall">2dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">14dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_xlarge">28dp</dimen>
+    <dimen name="margin_xxlarge">32dp</dimen>
+    <dimen name="margin_xxxlarge">36dp</dimen>
+    <dimen name="margin_xxxxlarge">52dp</dimen>
+    <dimen name="margin_xxxxxlarge">72dp</dimen>
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">14dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_xlarge">26dp</dimen>
+
+    <item name="padding_text_input_layout_lef_right" format="integer" type="dimen">52</item>
+    <item name="padding_text_input_layout_top_bottom" format="integer" type="dimen">52</item>
+
+    <dimen name="textSize_smaller">12sp</dimen>
+    <dimen name="textSize_small">14sp</dimen>
+    <dimen name="textSize_medium">16sp</dimen>
+    <dimen name="textSize_large">18sp</dimen>
+    <dimen name="textSize_xlarge">20sp</dimen>
+    <dimen name="textSize_xxlarge">24sp</dimen>
+
+    <dimen name="bottom_app_bar_height">56dp</dimen>
+    <dimen name="bottom_app_bar_elevation">8dp</dimen>
+
+    <dimen name="toolbar_elevation">3dp</dimen>
+
+    <dimen name="fab_default_size">56dp</dimen>
+    <dimen name="fab_mini_size">40dp</dimen>
+
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="basic_separator_elevation">2dp</dimen>
+
+    <dimen name="card_trip_height">90dp</dimen>
+    <dimen name="card_attachment_height">150dp</dimen>
+    <dimen name="card_attachment_height_2">180dp</dimen>
+    <dimen name="card_settings_height">60dp</dimen>
+    <dimen name="card_csv_height">90dp</dimen>
+
+    <dimen name="card_corner_radius">6dp</dimen>
+
+    <dimen name="card_standard_margin">@dimen/margin_medium</dimen>
+
+    <item name="corner_radius_box_text_input_layout" format="float" type="dimen">16</item>
+
+</resources>

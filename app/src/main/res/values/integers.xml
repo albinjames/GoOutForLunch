@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="short_animation_duration">200</integer>
+    <integer name="medium_animation_duration">400</integer>
+    <integer name="long_animation_duration">500</integer>
+
+    <integer name="margin_top_text_input_layout">0</integer>
+    <integer name="margin_bottom_text_input_layout">20</integer>
+    <integer name="margin_left_text_input_layout">0</integer>
+    <integer name="margin_right_text_input_layout">0</integer>
+
+    <integer name="padding_left_right_text_input_edit_text">48</integer>
+    <integer name="padding_top_bottom_text_input_edit_text">52</integer>
+
+    <integer name="very_short_animation">100</integer>
+
+
+</resources>
