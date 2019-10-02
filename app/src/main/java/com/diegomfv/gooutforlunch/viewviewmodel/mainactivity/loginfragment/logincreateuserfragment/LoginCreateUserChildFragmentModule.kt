@@ -9,11 +9,11 @@ import javax.inject.Named
 
 
 @Module(includes = [BaseChildFragmentModule::class])
-abstract class LoginCreateUserFragmentModule {
+abstract class LoginCreateUserChildFragmentModule {
 
     @Binds
     @Named(BaseChildFragmentModule.FRAGMENT)
     @PerChildFragment
-    abstract fun fragment(loginCreateUserFragment: LoginCreateUserFragment): Fragment
+    abstract fun fragment(loginCreateUserChildFragment: LoginCreateUserChildFragment): Fragment
 
 }

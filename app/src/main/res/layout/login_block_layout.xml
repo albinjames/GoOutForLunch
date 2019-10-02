@@ -3,8 +3,7 @@
     android:id="@+id/login_block_layout"
     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="@string/text_username">
+    android:layout_height="wrap_content">
     <!--        app:hintTextColor="@color/colorWhite"-->
     <!--        android:textColorHint="@color/colorWhite"-->
     <!--        app:boxStrokeColor="@color/colorWhite"-->
