@@ -47,3 +47,7 @@ obj/
 .idea/workspace.xml
 
 .DS_Store
+
+app/release/
+app/src/main/res/layout-land/
+app/google-services.json
