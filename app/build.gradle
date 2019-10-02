@@ -1,0 +1,134 @@
+//noinspection GradleDependency
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.diegomfv.gooutforlunch"
+        minSdkVersion 26
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0-alpha04'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    //exif
+    implementation 'androidx.exifinterface:exifinterface:1.0.0'
+
+    //opencsv
+    implementation 'com.opencsv:opencsv:4.6' // Here is opencsv library
+
+//    //Leak canary
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:17.2.0'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+    implementation 'com.google.firebase:firebase-database:19.1.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    //Material components
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+
+    //ViewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-beta04'
+
+    //CardView
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    //ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_viewmodel_livedata_version"
+
+    //Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+//    //MongoDB
+//    implementation "org.mongodb:stitch-android-sdk:$mongo_db_stitch_version"
+
+    //Dagger 2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
+    kaptTest "com.google.dagger:dagger-android-processor:$dagger_version"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+    kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    //RxJava, RxAndroid
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    //RxBindings
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.0.0-alpha2'
+
+    //RxFirebase
+    implementation 'com.github.FrangSierra:RxFirebase:1.5.6'
+
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    //Leak Canary
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+//    // Optional, if you use support library fragments:
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_2_converter_gson_version"
+//    implementation "com.squareup.okhttp3:logging-interceptor:3.4.1"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_2_converter_scalars"
+
+    //Retrofit RxJava
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_rxjava_adapter_version"
+
+    //Gson
+    implementation "com.google.code.gson:gson:$gson_version"
+
+    //TEST
+
+    //currency_layout
+    testImplementation "junit:junit:$junit_version"
+
+    //android currency_layout
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$test_expresso_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_reflect_version"
+}
+
+apply plugin: 'com.google.gms.google-services'
