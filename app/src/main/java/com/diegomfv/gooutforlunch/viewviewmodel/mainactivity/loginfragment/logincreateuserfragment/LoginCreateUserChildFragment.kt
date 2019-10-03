@@ -1,9 +1,16 @@
 package com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.logincreateuserfragment
 
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProviders
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
+import javax.inject.Inject
 
 class LoginCreateUserChildFragment : BaseFragment() {
+
+    @Inject
+    lateinit var factory : LoginCreateUserChildFragmentViewModel.Factory
+
+    lateinit var loginCreateUserChildFragmentViewModel: LoginCreateUserChildFragmentViewModel
 
     companion object {
 
@@ -17,6 +24,6 @@ class LoginCreateUserChildFragment : BaseFragment() {
     }
 
     override fun subscribeToModel() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        loginCreateUserChildFragmentViewModel = ViewModelProviders.of(this, factory).get(LoginCreateUserChildFragmentViewModel::class.java)
     }
 }

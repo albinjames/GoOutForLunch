@@ -5,12 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.diegomfv.gooutforlunch.R
 import com.diegomfv.gooutforlunch.utils.logSimple
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.MainActivityViewModel
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.loginmainfragment.LoginMainChildFragment
+import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
+
+    @Inject
+    lateinit var factory: LoginFragmentViewModel.Factory
+
+    lateinit var loginFragmentViewModel: LoginFragmentViewModel
 
     lateinit var mainView: View
 
@@ -35,13 +43,11 @@ class LoginFragment : BaseFragment() {
         logSimple("onCreate")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         logSimple("onCreateView")
         mainView = inflater.inflate(R.layout.fragment_login, container, false)
+        subscribeToModel()
 
         if (savedInstanceState == null) {
 
@@ -70,6 +76,6 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun subscribeToModel() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        loginFragmentViewModel = ViewModelProviders.of(this, factory).get(LoginFragmentViewModel::class.java)
     }
 }
