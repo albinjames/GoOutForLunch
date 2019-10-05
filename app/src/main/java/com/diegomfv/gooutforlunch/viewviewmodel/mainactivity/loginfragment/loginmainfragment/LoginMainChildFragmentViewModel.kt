@@ -10,6 +10,7 @@ import com.diegomfv.gooutforlunch.utils.Response
 import com.diegomfv.gooutforlunch.utils.TriggerOnce
 import com.diegomfv.gooutforlunch.utils.extensions.execute
 import com.diegomfv.gooutforlunch.utils.extensions.shortToast
+import com.diegomfv.gooutforlunch.utils.logSimple
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseViewModel
 
 class LoginMainChildFragmentViewModel(
@@ -21,6 +22,10 @@ class LoginMainChildFragmentViewModel(
     var passwordLiveData = MutableLiveData<String>("")
 
     val loginSuccessfulLiveData = MutableLiveData<TriggerOnce<Unit>>()
+
+    init {
+        logSimple("ViewModel init")
+    }
 
     fun login() {
         val loginRequestModel = LoginRequestModel(

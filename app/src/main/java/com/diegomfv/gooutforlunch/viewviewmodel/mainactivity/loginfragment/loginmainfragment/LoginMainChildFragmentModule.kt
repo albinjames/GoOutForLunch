@@ -2,6 +2,7 @@ package com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.logi
 
 import android.app.Application
 import androidx.fragment.app.Fragment
+import com.diegomfv.gooutforlunch.data.usecase.LoginUseCase
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseChildFragmentModule
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.LoginFragmentViewModel
 import com.diegomfv.refractaticket.di.scope.PerChildFragment
@@ -25,10 +26,8 @@ abstract class LoginMainChildFragmentModule {
         @PerChildFragment
         @Provides
         @JvmStatic
-        fun provideViewModelFactory(app: Application): LoginMainChildFragmentViewModel.Factory {
-            return LoginMainChildFragmentViewModel.Factory(app)
+        fun provideViewModelFactory(app: Application, loginUseCase: LoginUseCase): LoginMainChildFragmentViewModel.Factory {
+            return LoginMainChildFragmentViewModel.Factory(app, loginUseCase)
         }
     }
-
-
 }

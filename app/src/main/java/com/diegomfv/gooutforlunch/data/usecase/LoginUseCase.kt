@@ -1,5 +1,6 @@
 package com.diegomfv.gooutforlunch.data.usecase
 
+import android.app.Application
 import com.diegomfv.gooutforlunch.data.model.domainmodel.login.LoginRequestModel
 import com.diegomfv.gooutforlunch.data.model.dto.login.LoginResponseModelDTO
 import com.diegomfv.gooutforlunch.data.network.InternetMonitorTool
@@ -10,6 +11,7 @@ import com.diegomfv.gooutforlunch.utils.error.ErrorCode
 import io.reactivex.Observable
 
 class LoginUseCase (
+    val app: Application,
     val loginService: LoginService,
     val errorService: ErrorService,
     val imt: InternetMonitorTool) {

@@ -27,7 +27,7 @@ class LoginMainChildFragment : BaseFragment() {
     @Inject
     lateinit var factory: LoginMainChildFragmentViewModel.Factory
 
-//    lateinit var mainActivityViewModel: MainActivityViewModel
+    //    lateinit var mainActivityViewModel: MainActivityViewModel
 //    lateinit var loginFragmentViewModel: LoginFragmentViewModel
     lateinit var loginMainChildFragmentViewModel: LoginMainChildFragmentViewModel
 
@@ -37,7 +37,7 @@ class LoginMainChildFragment : BaseFragment() {
 
     companion object {
 
-        fun newInstance () : LoginMainChildFragment {
+        fun newInstance(): LoginMainChildFragment {
             val bundle = Bundle()
             val fragment = LoginMainChildFragment()
             fragment.arguments = bundle
@@ -67,10 +67,12 @@ class LoginMainChildFragment : BaseFragment() {
         emailBlock = mainView.findViewById(R.id.login_block_email)
         emailBlock.getTextInputLayout().hint = ApplicationResourceProvider.getString(R.string.email)
         passwordBlock = mainView.findViewById(R.id.login_block_password)
-        passwordBlock.getTextInputLayout().hint = ApplicationResourceProvider.getString(R.string.password)
+        passwordBlock.getTextInputLayout().hint =
+            ApplicationResourceProvider.getString(R.string.password)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        subscribeToModel()
         super.onActivityCreated(savedInstanceState)
     }
 
@@ -87,26 +89,30 @@ class LoginMainChildFragment : BaseFragment() {
     fun bindViews() {
         emailBlock.getEditText()
             .textChanges()
-            .debounce (500, TimeUnit.MILLISECONDS)
+            .skipInitialValue()
+            .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 it.toString().trim()
             }
             .doOnSubscribe { vCompositeDisposable.add(it) }
             .subscribe { text ->
-                println(text)
+                println("email in rxBinding $text")
+                loginMainChildFragmentViewModel.emailLiveData.value = text
             }
 
         passwordBlock.getEditText()
             .textChanges()
-            .debounce (500, TimeUnit.MILLISECONDS)
+            .skipInitialValue()
+            .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 it.toString().trim()
             }
             .doOnSubscribe { vCompositeDisposable.add(it) }
             .subscribe { text ->
-                println(text)
+                println("password in rxBinding $text")
+                loginMainChildFragmentViewModel.passwordLiveData.value = text
             }
 
         sign_in_button.clicks()
@@ -117,7 +123,8 @@ class LoginMainChildFragment : BaseFragment() {
     }
 
     override fun subscribeToModel() {
-        loginMainChildFragmentViewModel = ViewModelProviders.of(this, factory).get(LoginMainChildFragmentViewModel::class.java)
+        loginMainChildFragmentViewModel =
+            ViewModelProviders.of(this, factory).get(LoginMainChildFragmentViewModel::class.java)
 
         loginMainChildFragmentViewModel.loginSuccessfulLiveData.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
@@ -126,8 +133,22 @@ class LoginMainChildFragment : BaseFragment() {
 //                    val i = Intent(it, MainActivity::class.java)
 //                    startActivity(i)
 
-
                 }
+            }
+        })
+
+        //TODO Not working. Find a way to make RxBindings and LiveData work together
+        loginMainChildFragmentViewModel.emailLiveData.observe(this, Observer {
+            println("email $it")
+            emailBlock.getEditText().text?.let {
+                if(it.isBlank()) emailBlock.getEditText().setText(it)
+            }
+        })
+
+        loginMainChildFragmentViewModel.passwordLiveData.observe(this, Observer {
+            println("password $it")
+            passwordBlock.getEditText().text?.let {
+                if(it.isBlank()) passwordBlock.getEditText().setText(it)
             }
         })
     }
