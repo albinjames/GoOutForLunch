@@ -4,7 +4,7 @@ import dagger.Module
 
 
 @Module
-class DatabaseModule {
+abstract class DatabaseModule {
 
     @Module
     companion object {

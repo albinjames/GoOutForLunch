@@ -18,7 +18,6 @@ import javax.inject.Singleton
     BroadcastReceiverModule::class,
     UtilsModule::class
 ])
-
 abstract class AppModule {
 
     @Binds

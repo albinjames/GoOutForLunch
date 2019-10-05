@@ -1,41 +1,54 @@
 package com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.loginmainfragment
 
-import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.diegomfv.gooutforlunch.utils.Result
+import com.diegomfv.gooutforlunch.data.model.domainmodel.login.LoginRequestModel
+import com.diegomfv.gooutforlunch.data.usecase.LoginUseCase
+import com.diegomfv.gooutforlunch.utils.Response
 import com.diegomfv.gooutforlunch.utils.TriggerOnce
+import com.diegomfv.gooutforlunch.utils.extensions.execute
+import com.diegomfv.gooutforlunch.utils.extensions.shortToast
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseViewModel
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class LoginMainChildFragmentViewModel(
-    private val app: Application
+    val app: Application,
+    val loginUseCase: LoginUseCase
 ) : BaseViewModel(app) {
 
-    val startMainActivityLiveData = MutableLiveData<TriggerOnce<Unit>>()
+    var emailLiveData = MutableLiveData<String>("")
+    var passwordLiveData = MutableLiveData<String>("")
 
-    //TODO Temporary till implemented
-    @SuppressLint("CheckResult")
+    val loginSuccessfulLiveData = MutableLiveData<TriggerOnce<Unit>>()
+
     fun login() {
-        Observable.just(Result.Success(true))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { compositeDisposable?.add(it) }
-            .subscribe {
-                startMainActivityLiveData.value = TriggerOnce(Unit)
-            }
+        val loginRequestModel = LoginRequestModel(
+            email = emailLiveData.value,
+            password = passwordLiveData.value)
+
+        loginUseCase.login(loginRequestModel)
+            .execute(compositeDisposable,
+                { response ->
+                    when (response) {
+                        is Response.Success -> {
+                            loginSuccessfulLiveData.value = TriggerOnce(Unit)
+                        }
+                        is Response.Failure -> {
+                            response.throwable.message?.let { app.shortToast(it) }
+                        }
+                    }
+                })
     }
 
-
-    class Factory(private val app: Application) :
+    class Factory(val app: Application, val loginUseCase: LoginUseCase) :
         ViewModelProvider.NewInstanceFactory() {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return LoginMainChildFragmentViewModel(app) as T
+            return LoginMainChildFragmentViewModel(
+                app = app,
+                loginUseCase = loginUseCase
+            ) as T
         }
     }
 

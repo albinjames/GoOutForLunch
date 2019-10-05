@@ -20,9 +20,6 @@ class MainActivity : BaseActivity() {
 
     lateinit var mainActivityViewModel: MainActivityViewModel
 
-    lateinit var emailBlock : LoginBlock
-    lateinit var passwordBlock: LoginBlock
-
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

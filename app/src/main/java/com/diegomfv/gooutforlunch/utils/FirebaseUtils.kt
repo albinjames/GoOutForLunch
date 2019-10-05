@@ -16,12 +16,12 @@ object FirebaseUtils {
         return emailParts[0].first().toString().capitalize().plus(emailParts[1].toString().capitalize())
     }
 
-//    fun getUsername(email: String): String {
-//        return replaceCharsForFirebase(email.takeWhile { it != '@' })
+//    fun getUsername(emailLiveData: String): String {
+//        return replaceCharsForFirebase(emailLiveData.takeWhile { it != '@' })
 //    }
 
-//    fun getFirebaseDatabaseUserName(email: String): String {
-//        return replaceCharsForFirebase(getUsername(email))
+//    fun getFirebaseDatabaseUserName(emailLiveData: String): String {
+//        return replaceCharsForFirebase(getUsername(emailLiveData))
 //    }
 
     fun getUsernameInitials(email: String): String {

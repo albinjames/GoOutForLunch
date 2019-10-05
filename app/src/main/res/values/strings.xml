@@ -12,5 +12,7 @@
     <string name="forgot_password">Forgot your password?</string>
     <string name="email">email</string>
     <string name="password">password</string>
+    <string name="error_001_internet_not_available">Internet not available</string>
+    <string name="error_000_unknown_error">Unknown error</string>
 
 </resources>

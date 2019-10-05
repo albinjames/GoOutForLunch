@@ -12,10 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.diegomfv.gooutforlunch.R
 import com.diegomfv.gooutforlunch.utils.applicationprovider.ApplicationResourceProvider
 import com.diegomfv.gooutforlunch.utils.customview.LoginBlock
+import com.diegomfv.gooutforlunch.utils.extensions.shortToast
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.MainActivity
-import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.MainActivityViewModel
-import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.LoginFragmentViewModel
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -120,11 +119,14 @@ class LoginMainChildFragment : BaseFragment() {
     override fun subscribeToModel() {
         loginMainChildFragmentViewModel = ViewModelProviders.of(this, factory).get(LoginMainChildFragmentViewModel::class.java)
 
-        loginMainChildFragmentViewModel.startMainActivityLiveData.observe(this, Observer {
+        loginMainChildFragmentViewModel.loginSuccessfulLiveData.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
                 activity?.let {
-                    val i = Intent(it, MainActivity::class.java)
-                    startActivity(i)
+                    it.shortToast("Login completed successfully")
+//                    val i = Intent(it, MainActivity::class.java)
+//                    startActivity(i)
+
+
                 }
             }
         })
