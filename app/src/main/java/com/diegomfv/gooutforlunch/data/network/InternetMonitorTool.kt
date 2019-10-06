@@ -11,7 +11,6 @@ import java.net.SocketException
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class InternetMonitorTool @Inject constructor() {
 
     fun isInternetAvailableRx(): Observable<Boolean> {
