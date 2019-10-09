@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<item-->
-            <!--android:id="@+id/nav_view_new_trip_id"-->
-            <!--android:title="New Trip"-->
-            <!--android:icon="@drawable/ic_add_green_24dp"/>-->
+    <item
+        android:id="@+id/nav_view_map_id"
+        android:icon="@drawable/ic_map_black_24dp"
+        android:iconTint="@color/colorPrimary"
+        android:title="Map" />
 
-<!--    <item-->
-<!--            android:id="@+id/nav_view_list_id"-->
-<!--            android:title="@string/title_trips"-->
-<!--            android:icon="@drawable/ic_library_books_green_24dp"/>-->
+    <item
+        android:id="@+id/nav_view_restaurants_id"
+        android:icon="@drawable/ic_view_list_black_24dp"
+        android:iconTint="@color/colorPrimary"
+        android:title="Restaurants" />
 
-<!--    &lt;!&ndash;<item&ndash;&gt;-->
-<!--            &lt;!&ndash;android:id="@+id/nav_view_messages_id"&ndash;&gt;-->
-<!--            &lt;!&ndash;android:title="Messages"&ndash;&gt;-->
-<!--            &lt;!&ndash;android:icon="@drawable/ic_insert_comment_green_24dp"/>&ndash;&gt;-->
-
-<!--    <item-->
-<!--            android:id="@+id/nav_view_settings_id"-->
-<!--            android:title="@string/settings"-->
-<!--            android:icon="@drawable/ic_settings_applications_green_24dp"/>-->
+    <item
+        android:id="@+id/nav_view_coworkers_id"
+        android:icon="@drawable/ic_people_outline_black_24dp"
+        android:iconTint="@color/colorPrimary"
+        android:title="Coworkers" />
 
 </menu>

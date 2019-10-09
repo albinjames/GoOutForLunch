@@ -10,6 +10,7 @@ import com.diegomfv.gooutforlunch.R
 import com.diegomfv.gooutforlunch.utils.logSimple
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.mapchildfragment.MapChildFragment
+import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
 class MainFragment: BaseFragment() {
@@ -59,6 +60,7 @@ class MainFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logSimple("onViewCreated")
+        setBottomNavigationListener()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -74,4 +76,23 @@ class MainFragment: BaseFragment() {
     override fun subscribeToModel() {
         mainFragmentViewModel = ViewModelProviders.of(this, factory).get(MainFragmentViewModel::class.java)
     }
+
+    fun setBottomNavigationListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+
+                R.id.nav_view_map_id -> {
+//                    view_pager.setCurrentItem(0, true)
+                }
+                R.id.nav_view_restaurants_id -> {
+//                    view_pager.setCurrentItem(0, true)
+                }
+                R.id.nav_view_coworkers_id -> {
+//                    view_pager.setCurrentItem(2, true)
+                }
+            }
+            true
+        }
+    }
+
 }
