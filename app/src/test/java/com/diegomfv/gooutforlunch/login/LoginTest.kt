@@ -8,34 +8,25 @@ import com.diegomfv.gooutforlunch.data.service.ErrorService
 import com.diegomfv.gooutforlunch.data.service.LoginService
 import com.diegomfv.gooutforlunch.data.usecase.LoginUseCase
 import com.diegomfv.gooutforlunch.utils.Response
+import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Observable
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito.*
-import org.mockito.MockitoAnnotations
-import java.lang.RuntimeException
 
 class LoginTest {
 
-    @Mock
-    lateinit var mockApp: Application
-
-    @Mock
-    lateinit var mockLoginService: LoginService
-
-    @Mock
-    lateinit var mockErrorService: ErrorService
-
-    @Mock
-    lateinit var mockImt: InternetMonitorTool
+    val mockApp: Application = mock()
+    val mockLoginService: LoginService = mock()
+    val mockErrorService: ErrorService = mock()
+    val mockImt: InternetMonitorTool = mock() {
+        on { isInternetAvailableRx() } doReturn Observable.just(true)
+    }
 
     lateinit var loginUseCase: LoginUseCase
 
     @Before
     fun `set Up`() {
-        MockitoAnnotations.initMocks(this)
         loginUseCase = LoginUseCase(
             mockApp,
             mockLoginService,
@@ -47,45 +38,42 @@ class LoginTest {
     @Test
     fun `test when internet is available login is called`() {
 
-        `when`(mockImt.isInternetAvailableRx())
-            .thenReturn(Observable.just(true))
+//        whenever(mockImt.isInternetAvailableRx())
+//            .thenReturn(Observable.just(true))
 
-        `when`(mockLoginService.login(anyString(), anyString()))
-            .thenReturn(
-                Observable.just(
-                    Response.Success<LoginResponseModelDTO>(
-                        LoginResponseModelDTO("FAKE DATA")
-                    )
-                )
-            )
+        whenever(
+            mockLoginService.login(
+                argThat { this.isNotBlank() },
+                argThat { this.isNotBlank() })
+        )
+            .thenReturn(Observable.just(Response.Success(LoginResponseModelDTO("FAKE DATA"))))
 
         loginUseCase.login(LoginRequestModel("user.example@example.com", "abc@@@"))
             .blockingSubscribe {
                 assertTrue(it is Response.Success)
-                verify(mockLoginService).login(anyString(), anyString())
+                println((it as Response.Success).result.data)
+                verify(mockLoginService).login(any(), any())
             }
+
     }
 
     @Test
     fun `test when internet is not available login is not called`() {
 
-        `when`(mockImt.isInternetAvailableRx())
+        whenever(mockImt.isInternetAvailableRx())
             .thenReturn(Observable.just(false))
 
-        `when`(mockLoginService.login(anyString(), anyString()))
+        whenever(
+            mockLoginService.login(
+                argThat { this.isNotBlank() },
+                argThat { this.isNotBlank() })
+        )
             .thenReturn(Observable.just(Response.Failure(RuntimeException("FAKE DATA"))))
 
         loginUseCase.login(LoginRequestModel("user.example@example.com", "abc@@@"))
             .blockingSubscribe {
                 assertTrue(it is Response.Failure)
-                verify(mockLoginService, never()).login(anyString(), anyString())
+                verify(mockLoginService, never()).login(any(), any())
             }
     }
-
-//        val loginRequestModelArgument = object : ArgumentMatcher<LoginRequestModel> {
-//            override fun matches(argument: LoginRequestModel?): Boolean {
-//                return !argument?.email.isNullOrBlank() && !argument?.password.isNullOrBlank()
-//            }
-//        }
-
 }

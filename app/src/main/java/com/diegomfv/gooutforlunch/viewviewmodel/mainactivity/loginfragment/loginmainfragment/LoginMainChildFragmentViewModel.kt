@@ -18,8 +18,8 @@ class LoginMainChildFragmentViewModel(
     val loginUseCase: LoginUseCase
 ) : BaseViewModel(app) {
 
-    var emailLiveData = MutableLiveData<String>("")
-    var passwordLiveData = MutableLiveData<String>("")
+    var emailLiveData = MutableLiveData<String>("user@email.com")
+    var passwordLiveData = MutableLiveData<String>("123456")
 
     val loginSuccessfulLiveData = MutableLiveData<TriggerOnce<Unit>>()
 
@@ -47,7 +47,7 @@ class LoginMainChildFragmentViewModel(
     }
 
     class Factory(val app: Application, val loginUseCase: LoginUseCase) :
-        ViewModelProvider.NewInstanceFactory() {
+        ViewModelProvider.AndroidViewModelFactory(app) {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return LoginMainChildFragmentViewModel(

@@ -17,7 +17,6 @@ class LoginCreateUserChildFragment : BaseFragment() {
     lateinit var loginCreateUserChildFragmentViewModel: LoginCreateUserChildFragmentViewModel
 
     companion object {
-
         fun newInstance(): LoginCreateUserChildFragment {
             val bundle = Bundle()
             val fragment = LoginCreateUserChildFragment()

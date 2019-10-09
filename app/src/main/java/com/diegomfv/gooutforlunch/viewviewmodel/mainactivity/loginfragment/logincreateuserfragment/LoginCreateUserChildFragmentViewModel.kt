@@ -10,7 +10,7 @@ class LoginCreateUserChildFragmentViewModel(
 ) : BaseViewModel(app) {
 
     class Factory(private val app: Application) :
-        ViewModelProvider.NewInstanceFactory() {
+        ViewModelProvider.AndroidViewModelFactory(app) {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return LoginCreateUserChildFragmentViewModel(app) as T

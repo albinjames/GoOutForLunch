@@ -8,7 +8,7 @@ import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseViewModel
 class LoginFragmentViewModel(val app: Application) : BaseViewModel(app) {
 
     class Factory(private val app: Application) :
-        ViewModelProvider.NewInstanceFactory() {
+        ViewModelProvider.AndroidViewModelFactory(app) {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return LoginFragmentViewModel(app) as T

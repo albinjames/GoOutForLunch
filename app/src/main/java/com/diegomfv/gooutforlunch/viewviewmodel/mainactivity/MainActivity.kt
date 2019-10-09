@@ -3,6 +3,7 @@ package com.diegomfv.gooutforlunch.viewviewmodel.mainactivity
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.diegomfv.gooutforlunch.R
@@ -37,5 +38,12 @@ class MainActivity : BaseActivity() {
 
     override fun subscribeToModel() {
         mainActivityViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel::class.java)
+    }
+
+    fun navigateTo (fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

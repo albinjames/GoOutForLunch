@@ -15,6 +15,7 @@ import com.diegomfv.gooutforlunch.utils.customview.LoginBlock
 import com.diegomfv.gooutforlunch.utils.extensions.shortToast
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.MainActivity
+import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.MainFragment
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,7 +37,6 @@ class LoginMainChildFragment : BaseFragment() {
     lateinit var passwordBlock: LoginBlock
 
     companion object {
-
         fun newInstance(): LoginMainChildFragment {
             val bundle = Bundle()
             val fragment = LoginMainChildFragment()
@@ -130,9 +130,7 @@ class LoginMainChildFragment : BaseFragment() {
             it.getContentIfNotHandled()?.let {
                 activity?.let {
                     it.shortToast("Login completed successfully")
-//                    val i = Intent(it, MainActivity::class.java)
-//                    startActivity(i)
-
+                    (activity as? MainActivity)?.navigateTo(MainFragment.newInstance())
                 }
             }
         })
@@ -140,16 +138,18 @@ class LoginMainChildFragment : BaseFragment() {
         //TODO Not working. Find a way to make RxBindings and LiveData work together
         loginMainChildFragmentViewModel.emailLiveData.observe(this, Observer {
             println("email $it")
-            emailBlock.getEditText().text?.let {
-                if(it.isBlank()) emailBlock.getEditText().setText(it)
-            }
+            emailBlock.getEditText().setText(it)
+//            emailBlock.getEditText().text?.let {
+//                if(it.isBlank()) emailBlock.getEditText().setText(it)
+//            }
         })
 
         loginMainChildFragmentViewModel.passwordLiveData.observe(this, Observer {
             println("password $it")
-            passwordBlock.getEditText().text?.let {
-                if(it.isBlank()) passwordBlock.getEditText().setText(it)
-            }
+            passwordBlock.getEditText().setText(it)
+//            passwordBlock.getEditText().text?.let {
+//                if(it.isBlank()) passwordBlock.getEditText().setText(it)
+//            }
         })
     }
 }

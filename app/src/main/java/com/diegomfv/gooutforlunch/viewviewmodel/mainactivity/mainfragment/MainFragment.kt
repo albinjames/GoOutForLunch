@@ -1,4 +1,4 @@
-package com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment
+package com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,27 +9,25 @@ import androidx.lifecycle.ViewModelProviders
 import com.diegomfv.gooutforlunch.R
 import com.diegomfv.gooutforlunch.utils.logSimple
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
-import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.loginmainfragment.LoginMainChildFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.mapchildfragment.MapChildFragment
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment() {
+class MainFragment: BaseFragment() {
 
     @Inject
-    lateinit var factory: LoginFragmentViewModel.Factory
+    lateinit var factory: MainFragmentViewModel.Factory
 
-    lateinit var loginFragmentViewModel: LoginFragmentViewModel
+    lateinit var mainFragmentViewModel: MainFragmentViewModel
 
     lateinit var mainView: View
 
     companion object {
-
-        fun newInstance(): LoginFragment {
+        fun newInstance () : MainFragment {
             val bundle = Bundle()
-            val fragment = LoginFragment()
+            val fragment = MainFragment()
             fragment.arguments = bundle
             return fragment
         }
-
     }
 
     override fun onAttach(context: Context) {
@@ -42,18 +40,15 @@ class LoginFragment : BaseFragment() {
         logSimple("onCreate")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         logSimple("onCreateView")
-        mainView = inflater.inflate(R.layout.fragment_login, container, false)
+        mainView = inflater.inflate(R.layout.fragment_main, container, false)
         subscribeToModel()
 
         if (savedInstanceState == null) {
             childFragmentManager.beginTransaction()
-                .replace(R.id.child_fragment_container, LoginMainChildFragment.newInstance())
+                .replace(R.id.child_fragment_container, MapChildFragment.newInstance())
                 .addToBackStack(null)
                 .commit()
         }
@@ -77,7 +72,6 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun subscribeToModel() {
-        loginFragmentViewModel =
-            ViewModelProviders.of(this, factory).get(LoginFragmentViewModel::class.java)
+        mainFragmentViewModel = ViewModelProviders.of(this, factory).get(MainFragmentViewModel::class.java)
     }
 }
