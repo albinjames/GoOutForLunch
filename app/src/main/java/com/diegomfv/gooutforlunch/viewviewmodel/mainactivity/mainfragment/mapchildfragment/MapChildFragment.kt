@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.diegomfv.gooutforlunch.R
 import com.diegomfv.gooutforlunch.utils.logSimple
+import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseChildFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseChildFragmentModule
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.loginmainfragment.LoginMainChildFragment
 
-class MapChildFragment : BaseFragment() {
+class MapChildFragment : BaseChildFragment() {
 
     lateinit var mainView: View
 

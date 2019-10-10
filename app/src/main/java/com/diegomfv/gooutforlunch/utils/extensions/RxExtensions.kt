@@ -34,6 +34,25 @@ inline fun <reified T> Observable<T>.execute(
             { onComplete() })
 
 @SuppressLint("CheckResult")
+inline fun <reified T> Observable<T>.execute(
+    compositeDisposable: CompositeDisposable,
+    progressBarLiveData: MutableLiveData<TriggerOnce<Int>>? = null,
+    crossinline onNext: (result: T) -> Unit,
+    crossinline onError: (error: Throwable) -> Unit = ({ e -> e.printStackTrace(); Timber.e(e) }),
+    crossinline onComplete: () -> Unit = ({})
+): Disposable =
+    this.doOnSubscribe { compositeDisposable.add(it) }
+        .doOnSubscribe { progressBarLiveData?.postValue(TriggerOnce(SHOW_PROGRESS_LAYOUT)) }
+        .doOnTerminate { progressBarLiveData?.postValue(TriggerOnce(HIDE_PROGRESS_LAYOUT)) }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(
+            { onNext(it) },
+            { e -> onError(e) },
+            { onComplete() })
+
+
+@SuppressLint("CheckResult")
 inline fun Completable.execute(
     compositeDisposable: CompositeDisposable,
     crossinline onComplete: () -> Unit = ({}),

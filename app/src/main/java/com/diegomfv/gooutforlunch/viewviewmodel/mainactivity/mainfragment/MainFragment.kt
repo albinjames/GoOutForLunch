@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.diegomfv.gooutforlunch.R
 import com.diegomfv.gooutforlunch.utils.logSimple
 import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.coworkerslistchildfragment.CoworkersListChildFragment
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.mapchildfragment.MapChildFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.restaurantslistchildfragment.RestaurantsListChildFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
-class MainFragment: BaseFragment() {
+class MainFragment : BaseFragment() {
 
     @Inject
     lateinit var factory: MainFragmentViewModel.Factory
@@ -23,7 +26,7 @@ class MainFragment: BaseFragment() {
     lateinit var mainView: View
 
     companion object {
-        fun newInstance () : MainFragment {
+        fun newInstance(): MainFragment {
             val bundle = Bundle()
             val fragment = MainFragment()
             fragment.arguments = bundle
@@ -41,7 +44,11 @@ class MainFragment: BaseFragment() {
         logSimple("onCreate")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         logSimple("onCreateView")
         mainView = inflater.inflate(R.layout.fragment_main, container, false)
@@ -74,7 +81,8 @@ class MainFragment: BaseFragment() {
     }
 
     override fun subscribeToModel() {
-        mainFragmentViewModel = ViewModelProviders.of(this, factory).get(MainFragmentViewModel::class.java)
+        mainFragmentViewModel =
+            ViewModelProviders.of(this, factory).get(MainFragmentViewModel::class.java)
     }
 
     fun setBottomNavigationListener() {
@@ -82,17 +90,25 @@ class MainFragment: BaseFragment() {
             when (menuItem.itemId) {
 
                 R.id.nav_view_map_id -> {
-//                    view_pager.setCurrentItem(0, true)
+                    navigateTo(MapChildFragment.newInstance())
                 }
                 R.id.nav_view_restaurants_id -> {
-//                    view_pager.setCurrentItem(0, true)
+                    navigateTo(RestaurantsListChildFragment.newInstance())
                 }
                 R.id.nav_view_coworkers_id -> {
-//                    view_pager.setCurrentItem(2, true)
+//                    navigateTo(CoworkersListChildFragment.newInstance())
                 }
             }
             true
         }
+    }
+
+    //BaseFragment TODO
+    fun navigateTo(childFragment: Fragment) {
+        childFragmentManager.beginTransaction()
+            .replace(R.id.child_fragment_container, childFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }

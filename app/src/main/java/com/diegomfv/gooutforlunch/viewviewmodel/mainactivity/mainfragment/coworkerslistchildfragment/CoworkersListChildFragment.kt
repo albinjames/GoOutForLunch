@@ -1,8 +1,8 @@
 package com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.coworkerslistchildfragment
 
-import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.base.BaseChildFragment
 
-class CoworkersListChildFragment : BaseFragment() {
+class CoworkersListChildFragment : BaseChildFragment() {
 
 
 

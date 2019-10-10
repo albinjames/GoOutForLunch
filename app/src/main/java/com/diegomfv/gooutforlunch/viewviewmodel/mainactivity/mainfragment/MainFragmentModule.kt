@@ -10,8 +10,10 @@ import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.loginfragment.login
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.coworkerslistchildfragment.CoworkersListChildFragment
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.coworkerslistchildfragment.CoworkersListChildFragmentModule
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.mapchildfragment.MapChildFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.mapchildfragment.MapChildFragmentModule
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.mapchildfragment.MapChildFragmentViewModel
 import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.restaurantslistchildfragment.RestaurantsListChildFragment
+import com.diegomfv.gooutforlunch.viewviewmodel.mainactivity.mainfragment.restaurantslistchildfragment.RestaurantsListChildFragmentModule
 import com.diegomfv.refractaticket.di.scope.PerChildFragment
 import com.diegomfv.refractaticket.di.scope.PerFragment
 import dagger.Binds
@@ -33,11 +35,11 @@ abstract class MainFragmentModule {
     abstract fun coworkersListChildFragmentInjector () : CoworkersListChildFragment
 
     @PerChildFragment
-    @ContributesAndroidInjector(modules = [LoginCreateUserChildFragmentModule::class])
+    @ContributesAndroidInjector(modules = [MapChildFragmentModule::class])
     abstract fun mapChildFragmentInjector () : MapChildFragment
 
     @PerChildFragment
-    @ContributesAndroidInjector(modules = [LoginCreateUserChildFragmentModule::class])
+    @ContributesAndroidInjector(modules = [RestaurantsListChildFragmentModule::class])
     abstract fun restaurantListChildFragmentInjector () : RestaurantsListChildFragment
 
     @Module
